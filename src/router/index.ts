@@ -4,6 +4,7 @@ import Statistics from "../views/Statistics.vue";
 import NotFound from "../views/NotFound.vue";
 import EditLabel from "../views/EditLabel.vue";
 import Home from "../views/Home.vue";
+import Detail from "../views/Detail.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +30,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/:pathMatch(.*)*",
     name: "404",
     component: NotFound
+  },
+  {
+    path: "/detail/:id",
+    name: "Detail",
+    component: Detail,
+    props: true
   }
 ];
 

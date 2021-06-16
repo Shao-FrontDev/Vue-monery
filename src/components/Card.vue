@@ -8,7 +8,12 @@
       </div>
     </header>
     <ol>
-      <li v-for="item in card?.items" :key="item.id" class="card__record">
+      <li
+        v-for="item in card?.items"
+        :key="item.id"
+        class="card__record"
+        @click="showDetail(item)"
+      >
         <span>
           {{ item.selectedTags[0].content }}
         </span>
@@ -34,6 +39,9 @@ export default {
   methods: {
     toBeautify(value) {
       return beautify(value);
+    },
+    showDetail(item) {
+      console.log(item);
     }
   }
 };
@@ -60,6 +68,7 @@ export default {
     }
   }
   &__record {
+    cursor: pointer;
     padding: 10px 16px;
     background-color: white;
     display: flex;

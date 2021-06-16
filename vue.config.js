@@ -2,8 +2,10 @@
 const path = require("path");
 
 module.exports = {
+  publicPath:
+    process.env.NODE_ENV === "production" ? "/Vue-money-website/" : "/",
   lintOnSave: false,
-  chainWebpack: (config) => {
+  chainWebpack: config => {
     const dir = path.resolve(__dirname, "src/assets/icons");
 
     config.module
@@ -14,14 +16,11 @@ module.exports = {
       .use("svg-sprite-loader")
       .loader("svg-sprite-loader")
       .options({ extract: false })
-      .end()
-     
+      .end();
 
     config
       .plugin("svg-sprite")
-      .use(require("svg-sprite-loader/plugin"), [
-        { plainSprite: true },
-      ]);
+      .use(require("svg-sprite-loader/plugin"), [{ plainSprite: true }]);
     config.module.rule("svg").exclude.add(dir);
-  },
+  }
 };

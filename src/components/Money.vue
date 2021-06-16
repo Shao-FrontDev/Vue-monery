@@ -73,7 +73,10 @@ export default {
       this.record.selectedAmount = parseFloat(amount);
     },
     saveRecord() {
-      if (this.record.amount !== 0 && this.record.selectedTags.length !== 0) {
+      if (
+        this.record.selectedAmount !== 0 &&
+        this.record.selectedTags.length !== 0
+      ) {
         this.$store.commit("createRecord", this.record);
         this.record.selectedNotes = "";
         alert("已经保存");
