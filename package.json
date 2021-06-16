@@ -5,11 +5,13 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build:dev": "cross-env NODE_ENV=development yarn build"
   },
   "dependencies": {
     "@types/uuid": "^8.3.0",
     "core-js": "^3.6.5",
+    "cross-env": "^7.0.3",
     "dayjs": "^1.10.5",
     "global": "^4.4.0",
     "ts-node": "^10.0.0",
