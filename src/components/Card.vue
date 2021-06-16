@@ -10,9 +10,9 @@
     <ol>
       <router-link
         v-for="item in card && card.items"
-        :key="item.createAt"
+        :key="item.id"
         class="card__record"
-        :to="`/detail/${item.createAt}`"
+        :to="`/detail/${item.id}`"
       >
         <span>
           {{ item.selectedTags[0].content }}

@@ -5,7 +5,17 @@
 </template>
 
 <script>
-export default {};
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
+export default {
+  setup(props) {
+    const route = useRoute();
+    const store = useStore();
+    const recordList = store.getters.recordList;
+    const id = route.params.id;
+    const item = recordList.filters(item => item.id === id);
+  }
+};
 </script>
 
 <style lang="scss" scoped>

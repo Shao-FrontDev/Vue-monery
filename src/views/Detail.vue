@@ -38,6 +38,7 @@ export default {
   margin-bottom: 8px;
 
   &__icon {
+    cursor: pointer;
     position: absolute;
     left: 16px;
     top: 50%;

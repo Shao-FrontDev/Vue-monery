@@ -63,6 +63,7 @@ export default {
     },
 
     onUpdateTags(tags) {
+      console.log("onUpdateTags", tags);
       this.record.selectedTags = tags;
     },
 

@@ -2,7 +2,7 @@
   <div class="tags">
     <ul class="tags__links">
       <li
-        v-for="tag in dataSource"
+        v-for="tag in data"
         :key="tag.id"
         @click="toggle(tag)"
         :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
@@ -20,36 +20,58 @@
 </template>
 
 <script>
+import { reactive } from "vue";
 export default {
   name: "Tags",
   props: {
     dataSource: {
       type: Array,
-      default: () => {
-        return [];
-      }
+      required: true
     }
   },
-  data() {
-    return {
-      selectedTags: []
-    };
-  },
-  methods: {
-    toggle(tag) {
-      const index = this.selectedTags.indexOf(tag);
+  // data() {
+  //   return {
+  //     selectedTags: []
+  //   };
+  // },
+  // methods: {
+  //   toggle(tag) {
+  //     const index = this.selectedTags.indexOf(tag);
+  //     if (index >= 0) {
+  //       this.selectedTags.splice(index, 1);
+  //     } else {
+  //       this.selectedTags = [];
+  //       this.selectedTags.push(tag);
+  //     }
+  //     this.$emit("update:selectedTags", this.selectedTags);
+  //   },
+  //   create() {
+  //     const name = window.prompt("请输入标签名");
+  //     this.$emit("update:dataSource", name);
+  //   }
+  // }
+  setup(props, context) {
+    const selectedTags = reactive([]);
+
+    const data = reactive(props.dataSource);
+    const toggle = tag => {
+      const index = selectedTags.indexOf(tag);
       if (index >= 0) {
-        this.selectedTags.splice(index, 1);
+        selectedTags.splice(index, 1);
       } else {
-        this.selectedTags = [];
-        this.selectedTags.push(tag);
+        selectedTags.length = 0;
+        selectedTags.push(tag);
       }
-      this.$emit("update:selectedTags", this.selectedTags);
-    },
-    create() {
+
+      context.emit("update:selectedTags", selectedTags);
+    };
+
+    const create = () => {
       const name = window.prompt("请输入标签名");
-      this.$emit("update:dataSource", name);
-    }
+      context.emit("update:dataSource", name);
+    };
+
+    return { selectedTags, toggle, create, data };
   }
 };
 </script>
