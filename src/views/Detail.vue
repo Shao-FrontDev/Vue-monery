@@ -15,7 +15,6 @@ export default {
   name: "Detail",
   components: { DetailCard },
   setup(props) {
-    const { id } = props;
     const router = useRouter();
     const back = () => {
       router.push({ name: "Statistics" });

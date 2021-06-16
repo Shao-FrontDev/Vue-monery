@@ -1,24 +1,24 @@
 <template>
   <div class="card">
     <header class="card__header">
-      <h3 class="">{{ toBeautify(card?.title) }}</h3>
+      <h3 class="">{{ toBeautify(card && card.title) }}</h3>
       <div>
         <span class="card?__header__element">出：{{ card?.outcome }}</span>
-        <span>入：{{ card?.input }}</span>
+        <span>入：{{ card && card.input }}</span>
       </div>
     </header>
     <ol>
-      <li
-        v-for="item in card?.items"
-        :key="item.id"
+      <router-link
+        v-for="item in card && card.items"
+        :key="item.createAt"
         class="card__record"
-        @click="showDetail(item)"
+        :to="`/detail/${item.createAt}`"
       >
         <span>
           {{ item.selectedTags[0].content }}
         </span>
         <span> {{ item.selectedType }}{{ item.selectedAmount }} </span>
-      </li>
+      </router-link>
     </ol>
   </div>
 </template>
@@ -31,18 +31,22 @@ export default {
     card: Object,
     required: () => {
       return true;
-    },
-    default: () => {
-      return {};
     }
   },
-  methods: {
-    toBeautify(value) {
+
+  setup(props) {
+    const toBeautify = value => {
       return beautify(value);
-    },
-    showDetail(item) {
-      console.log(item);
-    }
+    };
+
+    const showDetail = item => {
+      console.log(item.id);
+    };
+
+    return {
+      toBeautify,
+      showDetail
+    };
   }
 };
 </script>
