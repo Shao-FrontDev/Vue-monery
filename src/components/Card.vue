@@ -34,7 +34,7 @@ export default {
     }
   },
 
-  setup(props) {
+  setup() {
     const toBeautify = value => {
       return beautify(value);
     };
