@@ -23,31 +23,44 @@
   </div>
 </template>
 
-<script lang="ts">
-import { mapMutations } from "vuex";
-import { defineComponent } from "vue";
+<script>
+import { ref } from "vue";
+import { useStore } from "vuex";
 
-export default defineComponent({
-  data() {
-    return {
-      type: "+" // '-' 表示支出 '+' 表示收入
-    };
-  },
+export default {
+  // data() {
+  //   return {
+  //     type: "+" // '-' 表示支出 '+' 表示收入
+  //   };
+  // },
 
-  methods: {
-    selectType(type: string) {
-      if (type !== "-" && type !== "+") {
+  // methods: {
+  //   ...mapMutations(["toggleAnimation"]),
+  //   handlerAnimation() {
+  //     this.toggleAnimation(false);
+  //   }
+  // },
+  setup(props, ctx) {
+    const store = useStore();
+    const type = ref("+");
+    const selectType = TYPE => {
+      if (TYPE !== "-" && TYPE !== "+") {
         throw new Error("type is unknown");
       }
-      this.type = type;
-      this.$emit("update:selectedType", type);
-    },
-    ...mapMutations(["toggleAnimation"]),
-    handlerAnimation() {
-      this.toggleAnimation(false);
-    }
+      type.value = TYPE;
+      ctx.emit("update:selectedType", type);
+    };
+
+    const handlerAnimation = () => {
+      store.commit("toggleAnimation", false);
+    };
+    return {
+      type,
+      selectType,
+      handlerAnimation
+    };
   }
-});
+};
 </script>
 
 <style lang="scss" scoped>
