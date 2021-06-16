@@ -17,6 +17,7 @@ interface RecordItem {
   selectedType: "-" | "+";
   selectedAmount: Number;
   createAt?: String;
+  id?: String;
 }
 
 export const store = createStore({
@@ -85,9 +86,12 @@ export const store = createStore({
         ) || [];
     },
     createRecord(state, record) {
+      record.createAt = new Date().toISOString();
+      record.id = uuidv4();
       const record2: RecordItem = clone(record);
-      record2.createAt = new Date().toISOString();
+      console.log(record2);
       state.recordList.push(record2);
+
       store.commit("saveRecords");
     },
     saveRecords(state) {
