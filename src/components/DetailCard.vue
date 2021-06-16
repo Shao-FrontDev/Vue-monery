@@ -1,6 +1,25 @@
 <template>
   <div class="card">
-    DetailCard
+    <div class="card__type">
+      {{ item.selectedTags[0].content }}
+    </div>
+    <div class="card__consumed">
+      {{ item.selectedType }}{{ item.selectedAmount }}
+    </div>
+    <div class="card__info">
+      <div class="card__info__time">
+        <span>记录时间</span>
+        <span>{{ beautify(item.createAt) }}</span>
+      </div>
+      <div class="card__info__remark">
+        <span>备注</span>
+        <span>{{ item.selectedNotes }}</span>
+      </div>
+    </div>
+    <div class="card__operation">
+      <button class="card__operation__delete">删除</button>
+      <button class="card__operation__edit">编辑</button>
+    </div>
   </div>
 </template>
 
@@ -11,9 +30,22 @@ export default {
   setup(props) {
     const route = useRoute();
     const store = useStore();
-    const recordList = store.getters.recordList;
     const id = route.params.id;
-    const item = recordList.filters(item => item.id === id);
+    const recordList = store.getters.recordList;
+    let item = null;
+    for (let i = 0; i < recordList.length; i++) {
+      if (recordList[i].id === id) {
+        item = recordList[i];
+      }
+    }
+    const beautify = str => {
+      const [prefix, other] = str.split("T");
+      return prefix;
+    };
+    return {
+      item,
+      beautify
+    };
   }
 };
 </script>
