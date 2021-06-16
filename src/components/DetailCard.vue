@@ -17,19 +17,22 @@
       </div>
     </div>
     <div class="card__operation">
-      <button class="card__operation__delete red">删除</button>
+      <button class="card__operation__delete red" @click="deleteRecord(id)">
+        删除
+      </button>
       <button class="card__operation__edit">编辑</button>
     </div>
   </div>
 </template>
 
 <script>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 export default {
   setup(props) {
     const route = useRoute();
     const store = useStore();
+    const router = useRouter();
     const id = route.params.id;
     const recordList = store.getters.recordList;
     let item = null;
@@ -40,11 +43,19 @@ export default {
     }
     const beautify = str => {
       const [prefix, other] = str.split("T");
-      return prefix;
+      const [timeStamp, last] = other.split(".");
+      const result = `${prefix} ${timeStamp}`;
+      return result;
+    };
+    const deleteRecord = id => {
+      store.commit("deleteRecord", id);
+      router.push({ name: "Statistics" });
     };
     return {
       item,
-      beautify
+      beautify,
+      deleteRecord,
+      id
     };
   }
 };
@@ -87,6 +98,7 @@ export default {
     justify-content: space-between;
     width: 100%;
     button {
+      cursor: pointer;
       width: 50%;
       outline: none;
       border: none;

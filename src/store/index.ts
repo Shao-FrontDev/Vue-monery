@@ -94,6 +94,11 @@ export const store = createStore({
 
       store.commit("saveRecords");
     },
+    deleteRecord(state, id) {
+      const newRecordList = state.recordList.filter(item => item.id !== id);
+      state.recordList = newRecordList;
+      store.commit("saveRecords");
+    },
     saveRecords(state) {
       window.localStorage.setItem(
         localStorageRecordsKeyName,
