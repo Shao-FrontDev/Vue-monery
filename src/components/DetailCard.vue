@@ -4,20 +4,20 @@
       {{ item.selectedTags[0].content }}
     </div>
     <div class="card__consumed">
-      {{ item.selectedType }}{{ item.selectedAmount }}
+      <h2>{{ item.selectedType }}{{ item.selectedAmount }}</h2>
     </div>
     <div class="card__info">
       <div class="card__info__time">
-        <span>记录时间</span>
+        <span class="grey">记录时间</span>
         <span>{{ beautify(item.createAt) }}</span>
       </div>
       <div class="card__info__remark">
-        <span>备注</span>
+        <span class="grey">备注</span>
         <span>{{ item.selectedNotes }}</span>
       </div>
     </div>
     <div class="card__operation">
-      <button class="card__operation__delete">删除</button>
+      <button class="card__operation__delete red">删除</button>
       <button class="card__operation__edit">编辑</button>
     </div>
   </div>
@@ -52,11 +52,53 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  border-radius: 8px;
+  border-radius: 16px;
   background-color: #fff;
-  padding: 0 8px;
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 10px;
+  &__type {
+    margin: 10px 0;
+  }
+  &__info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .grey {
+      color: gray;
+      margin-right: 16px;
+    }
+    &__time {
+      width: 100%;
+      display: flex;
+
+      span {
+        display: block;
+      }
+    }
+    &__remark {
+      display: block;
+    }
+  }
+  &__operation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    button {
+      width: 50%;
+      outline: none;
+      border: none;
+      background: none;
+      padding: 20px 0;
+    }
+    button.red {
+      color: #e1306c;
+    }
+  }
+  &__consumed {
+    margin-bottom: 10px;
+  }
 }
 </style>

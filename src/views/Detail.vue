@@ -26,7 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .detail-wrapper {
-  background-color: #f5f5f5;
+  background-color: #e5e5e5;
   height: 100%;
 }
 .navbar {
