@@ -17,42 +17,73 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { useStore } from "vuex";
 import Icon from "@/components/Icon.vue";
 import FormItem from "@/components/Money/FormItem.vue";
 import Button from "@/components/Button.vue";
+import { computed, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   components: { Icon, FormItem, Button },
-  data() {
-    return {
-      id: null
+  // data() {
+  //   return {
+  //     id: null
+  //   };
+  // },
+  // created() {
+  //   this.id = this.$route.params.id;
+  // },
+  // methods: {
+  //   ...mapMutations(["updateTag"]),
+  //   back() {
+  //     this.$router.push({ name: "Labels" });
+  //   },
+  //   deleteTag() {
+  //     this.$store.commit("deleteTag", this.id);
+  //     this.$router.push({ name: "Labels" });
+  //   },
+  //   update(e) {
+  //     const tag = { id: this.id, content: e.target.value };
+  //     this.updateTag(tag);
+  //   }
+  // },
+  // computed: {
+  //   tag() {
+  //     const tag = this.$store.getters.tagList.filter(
+  //       item => item.id === this.id
+  //     )[0];
+  //     return tag;
+  //   }
+  // },
+  setup() {
+    const id = ref(null);
+    const route = useRoute();
+    const router = useRouter();
+    const store = useStore();
+    id.value = route.params.id;
+    const back = () => {
+      router.push({ name: "Labels" });
     };
-  },
-  created() {
-    this.id = this.$route.params.id;
-  },
-  methods: {
-    ...mapMutations(["updateTag"]),
-    back() {
-      this.$router.push({ name: "Labels" });
-    },
-    deleteTag() {
-      this.$store.commit("deleteTag", this.id);
-      this.$router.push({ name: "Labels" });
-    },
-    update(e) {
-      const tag = { id: this.id, content: e.target.value };
-      this.updateTag(tag);
-    }
-  },
-  computed: {
-    tag() {
-      const tag = this.$store.getters.tagList.filter(
-        item => item.id === this.id
-      )[0];
+    const deleteTag = () => {
+      store.commit("deleteTag", id.value);
+      router.push({ name: "Labels" });
+    };
+    const update = e => {
+      const tag = { id: id.value, content: e.target.value };
+
+      store.commit("updateTag", tag);
+    };
+    const tag = computed(() => {
+      const tag = store.getters.tagList.filter(item => item.id === id.value)[0];
       return tag;
-    }
+    });
+    return {
+      back,
+      update,
+      deleteTag,
+      tag
+    };
   }
 };
 </script>
