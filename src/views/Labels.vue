@@ -8,7 +8,7 @@
         class="tags__item"
       >
         <span>{{ tag.content }}</span>
-        <Icon class="icon" name="right" />
+        <Icon class="tags__item__icon" name="right" />
       </router-link>
     </ol>
     <div class="wrapper">
@@ -58,7 +58,8 @@ export default {
     padding: 10px 8px 10px 0px;
     box-shadow: inset 0px -0.5px 0px #bcbbc1;
     align-items: center;
-    .icon {
+    &__icon {
+      cursor: pointer;
       margin-left: auto;
       height: 24px;
       width: 24px;

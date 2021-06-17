@@ -57,7 +57,47 @@
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
+import { ref, reactive } from "@vue/reactivity";
+import { useStore } from "vuex";
+
+export const useNumberPadEffect = () => {
+  const store = useStore();
+  const record = reactive({
+    selectedTags: [],
+    selectedNotes: "",
+    selectedType: "-",
+    selectedAmount: 0
+  });
+  const onUpdateTags = tags => {
+    record.selectedTags = tags;
+  };
+
+  const onUpdateType = type => {
+    record.selectedType = type;
+  };
+  const onUpdateAmount = amount => {
+    record.selectedAmount = parseFloat(amount);
+  };
+
+  const saveRecord = () => {
+    if (record.selectedAmount !== 0 && record.selectedTags.length !== 0) {
+      store.commit("createRecord", record);
+      record.selectedNotes = "";
+      alert("已经保存");
+      store.commit("toggleAnimation", false);
+    } else {
+      alert("请输入金额和选择标签");
+    }
+  };
+  return {
+    record,
+    onUpdateTags,
+    onUpdateType,
+    onUpdateAmount,
+    saveRecord
+  };
+};
+
 export default {
   name: "NumberPad",
 

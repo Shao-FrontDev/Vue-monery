@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    <!-- <button class="wrapper__button" @click="handlerAnimation">Close</button> -->
     <div v-if="$slots" @click="handlerAnimation">
       <slot @click="handlerAnimation"></slot>
     </div>

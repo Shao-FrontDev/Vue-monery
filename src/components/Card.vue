@@ -39,13 +39,8 @@ export default {
       return beautify(value);
     };
 
-    const showDetail = item => {
-      console.log(item.id);
-    };
-
     return {
-      toBeautify,
-      showDetail
+      toBeautify
     };
   }
 };
