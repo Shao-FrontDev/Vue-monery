@@ -48,7 +48,6 @@ export default {
         hashTable[date].outcome += calculate(newList[i], "-");
         hashTable[date].input += calculate(newList[i], "+");
       }
-      console.log(hashTable);
 
       return hashTable;
     });

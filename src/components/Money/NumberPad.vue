@@ -62,6 +62,7 @@
 import { ref, reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
 
+import { useToastEffect } from "@/components/Toast.vue";
 export const useNumberPadEffect = () => {
   const store = useStore();
   const record = reactive({
@@ -70,6 +71,7 @@ export const useNumberPadEffect = () => {
     selectedType: "-",
     selectedAmount: 0
   });
+  const { toastData, showToast } = useToastEffect();
   const onUpdateTags = tags => {
     record.selectedTags = tags;
   };
@@ -85,13 +87,16 @@ export const useNumberPadEffect = () => {
     if (record.selectedAmount !== 0 && record.selectedTags.length !== 0) {
       store.commit("createRecord", record);
       record.selectedNotes = "";
-      alert("已经保存");
-      store.commit("toggleAnimation", false);
+      showToast("保存成功");
+      // setTimeout(() => {
+      //   store.commit("toggleAnimation", false);
+      // }, 5000);
     } else {
-      alert("请输入金额和选择标签");
+      showToast("请输入金额和选择标签");
     }
   };
   return {
+    toastData,
     record,
     onUpdateTags,
     onUpdateType,

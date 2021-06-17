@@ -17,6 +17,7 @@
       @update:selectedAmount="onUpdateAmount"
       @updateData="saveRecord"
     />
+    <Toast v-if="toastData.showToast" :message="toastData.toastMessage"></Toast>
   </div>
 </template>
 
@@ -31,13 +32,15 @@ import NumberPad, {
 import Tags from "@/components/Money/Tags.vue";
 import Types from "@/components/Money/Types.vue";
 import FormItem from "@/components/Money/FormItem.vue";
+import Toast from "@/components/Toast.vue";
 
 export default {
   components: {
     NumberPad,
     Tags,
     Types,
-    FormItem
+    FormItem,
+    Toast
   },
 
   setup() {
@@ -49,7 +52,8 @@ export default {
       onUpdateTags,
       onUpdateType,
       onUpdateAmount,
-      saveRecord
+      saveRecord,
+      toastData
     } = useNumberPadEffect();
 
     const store = useStore();
@@ -69,7 +73,8 @@ export default {
       onUpdateType,
       onUpdateAmount,
       saveRecord,
-      tagList
+      tagList,
+      toastData
     };
   }
 };
