@@ -26,7 +26,9 @@
         <button @click="inputContent" class="numberPad__buttons__item">
           6
         </button>
-        <button @click="clear" class="numberPad__buttons__item">清空</button>
+        <button @click="clearNumber" class="numberPad__buttons__item">
+          清空
+        </button>
         <button @click="inputContent" class="numberPad__buttons__item">
           7
         </button>
@@ -38,7 +40,7 @@
         </button>
         <button
           class="numberPad__buttons__item numberPad__buttons__item--ok"
-          @click="updateData"
+          @click="updateNumber"
         >
           OK
         </button>
@@ -98,54 +100,71 @@ export const useNumberPadEffect = () => {
   };
 };
 
+const useOutputEffect = ctx => {
+  const output = ref("0");
+  const inputContent = event => {
+    const input = event.target.innerText;
+
+    if (output.value.length >= 16) return;
+    if (output.value.includes(".") && input === ".") return;
+
+    if (output.value === "0") {
+      if ("0123456789".indexOf(input) >= 0) {
+        output.value = input;
+        ctx.emit("update:selectedAmount", output.value);
+      } else {
+        output.value += input;
+        ctx.emit("update:selectedAmount", output.value);
+      }
+      return;
+    }
+    output.value += input;
+    ctx.emit("update:selectedAmount", output.value);
+  };
+  const deleteNumber = () => {
+    const result = output.value.substr(0, output.value.length - 1);
+    output.value = result;
+    if (result) {
+      ctx.emit("update:selectedAmount", output.value);
+    } else {
+      output.value = "0";
+      ctx.emit("update:selectedAmount", output.value);
+    }
+  };
+  const clearNumber = () => {
+    output.value = "0";
+    ctx.emit("update:selectedAmount", output.value);
+  };
+  const updateNumber = () => {
+    ctx.emit("updateData");
+    output.value = "0";
+  };
+  return {
+    output,
+    inputContent,
+    deleteNumber,
+    clearNumber,
+    updateNumber
+  };
+};
+
 export default {
   name: "NumberPad",
 
   setup(props, ctx) {
-    const output = ref("0");
-    const inputContent = event => {
-      const input = event.target.innerText;
-
-      if (output.value.length >= 16) return;
-      if (output.value.includes(".") && input === ".") return;
-
-      if (output.value === "0") {
-        if ("0123456789".indexOf(input) >= 0) {
-          output.value = input;
-          ctx.emit("update:selectedAmount", output.value);
-        } else {
-          output.value += input;
-          ctx.emit("update:selectedAmount", output.value);
-        }
-        return;
-      }
-      output.value += input;
-      ctx.emit("update:selectedAmount", output.value);
-    };
-    const deleteNumber = () => {
-      const result = output.value.substr(0, output.value.length - 1);
-      output.value = result;
-      if (result) {
-        ctx.emit("update:selectedAmount", output.value);
-      } else {
-        output.value = "0";
-        ctx.emit("update:selectedAmount", output.value);
-      }
-    };
-    const clear = () => {
-      output.value = "0";
-      ctx.emit("update:selectedAmount", output.value);
-    };
-    const updateData = () => {
-      ctx.emit("updateData");
-      output.value = "0";
-    };
+    const {
+      output,
+      inputContent,
+      deleteNumber,
+      clearNumber,
+      updateNumber
+    } = useOutputEffect(ctx);
     return {
       output,
       inputContent,
       deleteNumber,
-      clear,
-      updateData
+      clearNumber,
+      updateNumber
     };
   }
 };

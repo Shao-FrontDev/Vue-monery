@@ -64,7 +64,6 @@ export default {
       active,
       tags,
       record,
-
       updateData,
       onUpdateTags,
       onUpdateType,
