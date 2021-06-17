@@ -40,7 +40,6 @@ export default {
         item = recordList[i];
       }
     }
-    console.log(recordList);
     const beautify = str => {
       const [prefix, other] = str.split("T");
       const [timeStamp, last] = other.split(".");
@@ -84,13 +83,14 @@ export default {
     &__time {
       width: 100%;
       display: flex;
-
+      margin: 10px;
       span {
         display: block;
       }
     }
     &__remark {
       display: block;
+      margin: 10px;
     }
   }
   &__operation {

@@ -13,12 +13,23 @@ interface TagItem {
 
 interface RecordItem {
   selectedTags: Array<String>;
-  selectedNotes: String;
+  selectedNotes: string;
   selectedType: "-" | "+";
-  selectedAmount: Number;
-  createAt?: String;
-  id?: String;
+  selectedAmount: number;
+  createAt?: string;
+  id?: string;
 }
+
+const MockTagsData = [
+  { content: "交通费用", id: "d8d8c54a-32cf-452d-b522-c0702b8dfa35" },
+  { content: "工资", id: "cbcf2514-6c0c-4eba-ac0e-c68636fa251c" },
+  { content: " 日常生活", id: "0f1f92e4-aa80-4abb-b698-2e284088437f" },
+  { content: "电子产品", id: "6a75c416-c315-4876-a1e8-b95818d7c463" },
+  { content: "话费", id: "b1f17ed6-07f0-4839-9f69-e0fa14034039" },
+  { content: "游戏", id: "c1929d09-96f8-4002-8b1b-8e2253b3ce95" },
+  { content: "美容", id: "20221362-f312-4d12-b391-b2562a152547" },
+  { content: "学习", id: "e513726a-1b49-4d2f-a0b6-6d426525a764" }
+];
 
 export const store = createStore({
   state: {
@@ -53,7 +64,7 @@ export const store = createStore({
       state.tagList =
         JSON.parse(
           window.localStorage.getItem(localStorageTagsKeyName) as string
-        ) || [];
+        ) || MockTagsData;
     },
     deleteTag(state, id) {
       const newtagList = (state.tagList as Array<TagItem>).filter(

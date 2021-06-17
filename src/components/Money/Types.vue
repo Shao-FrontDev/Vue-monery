@@ -35,7 +35,7 @@ export default {
         throw new Error("type is unknown");
       }
       type.value = TYPE;
-      ctx.emit("update:selectedType", type);
+      ctx.emit("update:selectedType", type.value);
     };
 
     const handlerAnimation = () => {
