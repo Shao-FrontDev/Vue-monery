@@ -69,7 +69,7 @@ export default {
 
 .item-wrapper {
   display: block;
-  margin: 10px;
+  margin: 20px 10px;
   border-radius: 16px;
 }
 </style>

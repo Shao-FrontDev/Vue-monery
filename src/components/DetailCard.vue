@@ -20,7 +20,6 @@
       <button class="card__operation__delete red" @click="deleteRecord(id)">
         删除
       </button>
-      <button class="card__operation__edit">编辑</button>
     </div>
   </div>
 </template>
@@ -29,7 +28,7 @@
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 export default {
-  setup(props) {
+  setup() {
     const route = useRoute();
     const store = useStore();
     const router = useRouter();
@@ -41,6 +40,7 @@ export default {
         item = recordList[i];
       }
     }
+    console.log(recordList);
     const beautify = str => {
       const [prefix, other] = str.split("T");
       const [timeStamp, last] = other.split(".");
@@ -69,7 +69,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin: 20px;
   &__type {
     margin: 10px 0;
   }
@@ -99,7 +99,7 @@ export default {
     width: 100%;
     button {
       cursor: pointer;
-      width: 50%;
+      width: 100%;
       outline: none;
       border: none;
       background: none;
