@@ -153,7 +153,6 @@ export const store = createStore({
       record.createAt = new Date().toISOString();
       record.id = uuidv4();
       const record2: RecordItem = clone(record);
-      console.log(record2);
       state.recordList.push(record2);
 
       store.commit("saveRecords");

@@ -41,7 +41,6 @@ export default {
   },
 
   setup() {
-    const output = ref("200");
     const active = ref(false);
     const tags = ref(null);
 
@@ -56,25 +55,16 @@ export default {
     const store = useStore();
     store.commit("fetchTags");
 
-    const clear = () => {
-      output.value = "";
-    };
-    const changeState = () => {
-      active.value = !active.value;
-    };
-
     const updateData = tag => {
       store.commit("createTag", tag);
     };
 
     const tagList = computed(() => store.getters.tagList);
     return {
-      output,
       active,
       tags,
       record,
-      clear,
-      changeState,
+
       updateData,
       onUpdateTags,
       onUpdateType,

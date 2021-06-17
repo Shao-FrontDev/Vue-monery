@@ -73,7 +73,6 @@ export const useNumberPadEffect = () => {
   };
 
   const onUpdateType = type => {
-    console.log("onUpdateType", type);
     record.selectedType = type;
   };
   const onUpdateAmount = amount => {
