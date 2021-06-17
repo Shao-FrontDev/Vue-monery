@@ -29,27 +29,7 @@ export default {
       required: true
     }
   },
-  // data() {
-  //   return {
-  //     selectedTags: []
-  //   };
-  // },
-  // methods: {
-  //   toggle(tag) {
-  //     const index = this.selectedTags.indexOf(tag);
-  //     if (index >= 0) {
-  //       this.selectedTags.splice(index, 1);
-  //     } else {
-  //       this.selectedTags = [];
-  //       this.selectedTags.push(tag);
-  //     }
-  //     this.$emit("update:selectedTags", this.selectedTags);
-  //   },
-  //   create() {
-  //     const name = window.prompt("请输入标签名");
-  //     this.$emit("update:dataSource", name);
-  //   }
-  // }
+
   setup(props, context) {
     const selectedTags = reactive([]);
 

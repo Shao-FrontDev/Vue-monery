@@ -26,36 +26,6 @@ import { useRoute, useRouter } from "vue-router";
 
 export default {
   components: { Icon, FormItem, Button },
-  // data() {
-  //   return {
-  //     id: null
-  //   };
-  // },
-  // created() {
-  //   this.id = this.$route.params.id;
-  // },
-  // methods: {
-  //   ...mapMutations(["updateTag"]),
-  //   back() {
-  //     this.$router.push({ name: "Labels" });
-  //   },
-  //   deleteTag() {
-  //     this.$store.commit("deleteTag", this.id);
-  //     this.$router.push({ name: "Labels" });
-  //   },
-  //   update(e) {
-  //     const tag = { id: this.id, content: e.target.value };
-  //     this.updateTag(tag);
-  //   }
-  // },
-  // computed: {
-  //   tag() {
-  //     const tag = this.$store.getters.tagList.filter(
-  //       item => item.id === this.id
-  //     )[0];
-  //     return tag;
-  //   }
-  // },
   setup() {
     const id = ref(null);
     const route = useRoute();
