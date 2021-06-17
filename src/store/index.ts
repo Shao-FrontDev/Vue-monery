@@ -31,6 +31,59 @@ const MockTagsData = [
   { content: "学习", id: "e513726a-1b49-4d2f-a0b6-6d426525a764" }
 ];
 
+const MockRecordsData = [
+  {
+    selectedTags: [
+      { content: "交通费用", id: "d8d8c54a-32cf-452d-b522-c0702b8dfa35" }
+    ],
+    selectedNotes: "打车",
+    selectedType: "-",
+    selectedAmount: 50,
+    createAt: "2021-06-17T05:58:54.458Z",
+    id: "a917161a-4634-4ce3-8d7b-87ce2343414e"
+  },
+  {
+    selectedTags: [
+      { content: "学习", id: "e513726a-1b49-4d2f-a0b6-6d426525a764" }
+    ],
+    selectedNotes: "买笔记本",
+    selectedType: "-",
+    selectedAmount: 99,
+    createAt: "2021-06-17T05:58:24.440Z",
+    id: "ba5fef60-2725-4880-a2b5-0f502707d083"
+  },
+  {
+    selectedTags: [
+      { content: "游戏", id: "c1929d09-96f8-4002-8b1b-8e2253b3ce95" }
+    ],
+    selectedNotes: "充值原神",
+    selectedType: "-",
+    selectedAmount: 520,
+    createAt: "2021-06-13T05:58:10.914Z",
+    id: "c7254312-8db2-4979-951d-d8eeb86d4f07"
+  },
+  {
+    selectedTags: [
+      { content: "工资", id: "cbcf2514-6c0c-4eba-ac0e-c68636fa251c" }
+    ],
+    selectedNotes: "",
+    selectedType: "+",
+    selectedAmount: 3500,
+    createAt: "2021-06-15T06:06:16.351Z",
+    id: "0129c2ef-43eb-4b8d-9122-2a198d3e0e97"
+  },
+  {
+    selectedTags: [
+      { content: " 日常生活", id: "0f1f92e4-aa80-4abb-b698-2e284088437f" }
+    ],
+    selectedNotes: "购买生活用品",
+    selectedType: "-",
+    selectedAmount: 129,
+    createAt: "2021-06-17T06:06:38.856Z",
+    id: "5fbf1034-2b9f-4877-800f-41ea2d3f4e85"
+  }
+];
+
 export const store = createStore({
   state: {
     tagList: [] as TagItem[],
@@ -94,7 +147,7 @@ export const store = createStore({
       state.recordList =
         JSON.parse(
           window.localStorage.getItem(localStorageRecordsKeyName) as string
-        ) || [];
+        ) || MockRecordsData;
     },
     createRecord(state, record) {
       record.createAt = new Date().toISOString();
