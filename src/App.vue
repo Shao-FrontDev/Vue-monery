@@ -5,25 +5,23 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
+import { nextTick, provide } from "@vue/runtime-core";
 export default {
-  components: {},
-  data() {
-    return {
-      isRouterAlive: true
-    };
-  },
-  provide() {
-    return {
-      reload: this.reload
-    };
-  },
-  methods: {
-    reload() {
-      this.isRouterAlive = false;
-      this.$nextTick(() => {
-        this.isRouterAlive = true;
+  setup() {
+    const isRouterAlive = ref(true);
+    const reload = () => {
+      isRouterAlive.value = false;
+      nextTick(() => {
+        isRouterAlive.value = true;
       });
-    }
+    };
+    provide("reload", reload);
+
+    return {
+      isRouterAlive,
+      reload
+    };
   }
 };
 </script>
