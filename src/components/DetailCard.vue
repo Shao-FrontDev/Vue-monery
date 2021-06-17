@@ -4,7 +4,7 @@
       {{ item.selectedTags[0].content }}
     </div>
     <div class="card__consumed">
-      <h2>{{ item.selectedType }}{{ item.selectedAmount }}</h2>
+      <h3>{{ item.selectedType }}{{ item.selectedAmount }}</h3>
     </div>
     <div class="card__info">
       <div class="card__info__time">

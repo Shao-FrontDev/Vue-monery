@@ -57,51 +57,56 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
 export default {
   name: "NumberPad",
-  data() {
-    return {
-      output: "0"
-    };
-  },
-  methods: {
-    inputContent(event) {
+
+  setup(props, ctx) {
+    const output = ref("0");
+    const inputContent = event => {
       const input = event.target.innerText;
 
-      if (input.length >= 16) return;
-      if (this.output.includes(".") && input === ".") return;
-      if (this.output === "0") {
+      if (output.value.length >= 16) return;
+      if (output.value.includes(".") && input === ".") return;
+
+      if (output.value === "0") {
         if ("0123456789".indexOf(input) >= 0) {
-          this.output = input;
-          this.$emit("update:selectedAmount", this.output);
+          output.value = input;
+          ctx.emit("update:selectedAmount", output.value);
         } else {
-          this.output += input;
-          this.$emit("update:selectedAmount", this.output);
+          output.value += input;
+          ctx.emit("update:selectedAmount", output.value);
         }
         return;
       }
-      this.output += input;
-      this.$emit("update:selectedAmount", this.output);
-    },
-    deleteNumber() {
-      const result = this.output.substr(0, this.output.length - 1);
-      this.output = result;
+      output.value += input;
+      ctx.emit("update:selectedAmount", output.value);
+    };
+    const deleteNumber = () => {
+      const result = output.value.substr(0, output.value.length - 1);
+      output.value = result;
       if (result) {
-        this.$emit("update:selectedAmount", this.output);
+        ctx.emit("update:selectedAmount", output.value);
       } else {
-        this.output = "0";
-        this.$emit("update:selectedAmount", this.output);
+        output.value = "0";
+        ctx.emit("update:selectedAmount", output.value);
       }
-    },
-
-    clear() {
-      this.output = "0";
-      this.$emit("update:selectedAmount", this.output);
-    },
-    updateData() {
-      this.$emit("updateData");
-      this.output = "0";
-    }
+    };
+    const clear = () => {
+      output.value = "0";
+      ctx.emit("update:selectedAmount", output.value);
+    };
+    const updateData = () => {
+      ctx.emit("updateData");
+      output.value = "0";
+    };
+    return {
+      output,
+      inputContent,
+      deleteNumber,
+      clear,
+      updateData
+    };
   }
 };
 </script>

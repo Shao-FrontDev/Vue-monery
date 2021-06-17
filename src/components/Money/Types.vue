@@ -28,18 +28,6 @@ import { ref } from "vue";
 import { useStore } from "vuex";
 
 export default {
-  // data() {
-  //   return {
-  //     type: "+" // '-' 表示支出 '+' 表示收入
-  //   };
-  // },
-
-  // methods: {
-  //   ...mapMutations(["toggleAnimation"]),
-  //   handlerAnimation() {
-  //     this.toggleAnimation(false);
-  //   }
-  // },
   setup(props, ctx) {
     const store = useStore();
     const type = ref("+");
