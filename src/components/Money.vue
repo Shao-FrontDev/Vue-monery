@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    {{ record }}
     <Types @update:selectedType="onUpdateType" :type="record.selectedType">
       <button class="wrapper__button">Close</button>
     </Types>
