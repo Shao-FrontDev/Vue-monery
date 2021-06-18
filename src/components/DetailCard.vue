@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 export default {
@@ -41,10 +42,9 @@ export default {
       }
     }
     const beautify = str => {
-      const [prefix, other] = str.split("T");
-      const [timeStamp, last] = other.split(".");
-      const result = `${prefix} ${timeStamp}`;
-      return result;
+      return dayjs(str)
+        .format("YYYY-MM-DDTHH:mm")
+        .replace("T", " ");
     };
     const deleteRecord = id => {
       store.commit("deleteRecord", id);

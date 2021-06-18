@@ -40,7 +40,6 @@ export default {
   emits: ["update:value"],
   methods: {
     x(isoString) {
-      console.log(isoString);
       return dayjs(isoString).format("YYYY-MM-DDTHH:mm");
     }
   }
