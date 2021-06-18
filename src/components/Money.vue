@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    {{ record }}
     <Types @update:selectedType="onUpdateType" :type="record.selectedType">
       <button class="wrapper__button">Close</button>
     </Types>
@@ -12,6 +13,12 @@
       v-model:value="record.selectedNotes"
       filedName="备注"
       placeholder="在这里输入备注"
+    />
+    <FormItem
+      v-model:value="record.createAt"
+      filedName="日期"
+      placeholder="在这里输入备注"
+      type="datetime-local"
     />
     <NumberPad
       @update:selectedAmount="onUpdateAmount"

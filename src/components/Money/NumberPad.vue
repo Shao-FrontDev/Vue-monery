@@ -69,7 +69,8 @@ export const useNumberPadEffect = () => {
     selectedTags: [],
     selectedNotes: "",
     selectedType: "-",
-    selectedAmount: 0
+    selectedAmount: 0,
+    createAt: new Date().toISOString()
   });
   const { toastData, showToast } = useToastEffect();
   const onUpdateTags = tags => {
@@ -88,9 +89,6 @@ export const useNumberPadEffect = () => {
       store.commit("createRecord", record);
       record.selectedNotes = "";
       showToast("保存成功");
-      // setTimeout(() => {
-      //   store.commit("toggleAnimation", false);
-      // }, 5000);
     } else {
       showToast("请输入金额和选择标签");
     }

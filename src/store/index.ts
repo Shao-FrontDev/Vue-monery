@@ -150,7 +150,7 @@ export const store = createStore({
         ) || MockRecordsData;
     },
     createRecord(state, record) {
-      record.createAt = new Date().toISOString();
+      record.createAt = record.createAt || new Date().toISOString();
       record.id = uuidv4();
       const record2: RecordItem = clone(record);
       state.recordList.push(record2);

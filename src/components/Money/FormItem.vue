@@ -2,18 +2,30 @@
   <div class="form-item">
     <label class="form-item__notes">
       <span class="form-item__notes__title">{{ filedName }}</span>
-      <input
-        type="text"
-        class="form-item__notes__input"
-        :placeholder="placeholder"
-        :value="value"
-        @input="$emit('update:value', $event.target.value)"
-      />
+      <template v-if="type">
+        <input
+          :type="type"
+          class="form-item__notes__input"
+          :placeholder="placeholder"
+          :value="x(value)"
+          @input="$emit('update:value', $event.target.value)"
+        />
+      </template>
+      <template v-else>
+        <input
+          type="text"
+          class="form-item__notes__input"
+          :placeholder="placeholder"
+          :value="value"
+          @input="$emit('update:value', $event.target.value)"
+        />
+      </template>
     </label>
   </div>
 </template>
 
 <script>
+import dayjs from "dayjs";
 export default {
   model: {
     prop: "value",
@@ -22,9 +34,16 @@ export default {
   props: {
     value: String,
     filedName: { type: String, required: true },
-    placeholder: { type: String, defalut: "" }
+    placeholder: { type: String, defalut: "" },
+    type: String
   },
-  emits: ["update:value"]
+  emits: ["update:value"],
+  methods: {
+    x(isoString) {
+      console.log(isoString);
+      return dayjs(isoString).format("YYYY-MM-DDTHH:mm");
+    }
+  }
 };
 </script>
 
