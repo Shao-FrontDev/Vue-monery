@@ -24,11 +24,9 @@
 
 <script>
 import { ref } from "vue";
-import { useStore } from "vuex";
 
 export default {
   setup(props, ctx) {
-    const store = useStore();
     const type = ref("+");
     const selectType = TYPE => {
       if (TYPE !== "-" && TYPE !== "+") {
@@ -38,9 +36,6 @@ export default {
       ctx.emit("update:selectedType", type.value);
     };
 
-    // const handlerAnimation = () => {
-    //   store.commit("toggleAnimation", false);
-    // };
     return {
       type,
       selectType

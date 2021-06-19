@@ -126,7 +126,7 @@ export default {
     position: relative;
     text-align: center;
     font-weight: 900;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
     text-transform: uppercase;
   }
   &__button {
