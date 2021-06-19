@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <basic-bar />
     <ol>
       <li v-for="(card, index) in cardList" :key="index" class="item-wrapper">
         <Card :card="card" />
@@ -17,9 +18,10 @@ import Card from "@/components/Card.vue";
 import { reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
+import BasicBar from "@/components/BasicBar.vue";
 
 export default {
-  components: { Card },
+  components: { Card, BasicBar },
   setup() {
     let recordList = reactive({});
     const store = useStore();
