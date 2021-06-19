@@ -1,16 +1,29 @@
 <template>
-  <button class="button"><slot></slot></button>
+  <button class="button" :style="styleObj"><slot></slot></button>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    color: String,
+    default: () => {
+      return "#333333";
+    }
+  },
+  computed: {
+    styleObj() {
+      return {
+        backgroundColor: this.color
+      };
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 button {
   cursor: pointer;
   border: none;
-  background: #e1306c;
   border-radius: 16px;
   color: white;
   height: 50px;

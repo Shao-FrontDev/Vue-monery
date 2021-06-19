@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <div v-if="$slots" @click="handlerAnimation">
-      <slot @click="handlerAnimation"></slot>
+    <div v-if="$slots">
+      <slot></slot>
     </div>
     <ul class="wrapper__types">
       <li
@@ -38,13 +38,12 @@ export default {
       ctx.emit("update:selectedType", type.value);
     };
 
-    const handlerAnimation = () => {
-      store.commit("toggleAnimation", false);
-    };
+    // const handlerAnimation = () => {
+    //   store.commit("toggleAnimation", false);
+    // };
     return {
       type,
-      selectType,
-      handlerAnimation
+      selectType
     };
   }
 };

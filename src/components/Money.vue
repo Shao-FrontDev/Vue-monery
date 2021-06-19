@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
     <Types @update:selectedType="onUpdateType" :type="record.selectedType">
-      <button class="wrapper__button">Close</button>
+      <Button class="wrapper__button" color="#e1306c" @click="handlerAnimation">
+        Close
+      </Button>
     </Types>
     <Tags
       @update:dataSource="updateData"
@@ -39,6 +41,7 @@ import Tags from "@/components/Money/Tags.vue";
 import Types from "@/components/Money/Types.vue";
 import FormItem from "@/components/Money/FormItem.vue";
 import Toast from "@/components/Toast.vue";
+import Button from "@/components/Button.vue";
 
 export default {
   components: {
@@ -46,7 +49,8 @@ export default {
     Tags,
     Types,
     FormItem,
-    Toast
+    Toast,
+    Button
   },
 
   setup() {
@@ -69,6 +73,10 @@ export default {
       store.commit("createTag", tag);
     };
 
+    const handlerAnimation = () => {
+      store.commit("toggleAnimation", false);
+    };
+
     const tagList = computed(() => store.getters.tagList);
     return {
       active,
@@ -80,7 +88,8 @@ export default {
       onUpdateAmount,
       saveRecord,
       tagList,
-      toastData
+      toastData,
+      handlerAnimation
     };
   }
 };
@@ -95,13 +104,6 @@ export default {
     position: absolute;
     top: 5px;
     left: 5px;
-    cursor: pointer;
-    border: none;
-    background: #e1306c;
-    border-radius: 16px;
-    color: white;
-    height: 50px;
-    width: 100px;
   }
 }
 </style>
