@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <calendar />
     <basic-bar />
     <ol>
       <li v-for="(card, index) in cardList" :key="index" class="item-wrapper">
@@ -19,14 +20,20 @@ import { reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 import BasicBar from "@/components/BasicBar.vue";
+import Calendar from "@/components/Calendar.vue";
 
 export default {
-  components: { Card, BasicBar },
+  components: { Card, BasicBar, Calendar },
   setup() {
     let recordList = reactive({});
     const store = useStore();
     store.commit("fetchRecords");
     recordList = store.getters.recordList;
+    console.log(recordList);
+
+    recordList.forEach(item => {
+      console.log(item);
+    });
 
     const cardList = computed(() => {
       if (recordList.length === 0) {
