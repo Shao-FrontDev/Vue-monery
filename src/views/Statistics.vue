@@ -27,7 +27,7 @@ import Card from "@/components/Card.vue";
 import { reactive, ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
-import BasicBar from "@/components/BasicBar.vue";
+import BasicBar from "@/components/BasicPie.vue";
 import Button from "@/components/Button.vue";
 
 export default {
