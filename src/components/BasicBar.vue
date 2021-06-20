@@ -25,7 +25,11 @@ export default {
       tooltip: {
         trigger: "item"
       },
-
+      legend: {
+        orient: "vertical",
+        left: "left",
+        padding: 20
+      },
       series: [
         {
           type: "pie",
@@ -80,6 +84,7 @@ export default {
   align-items: center;
 }
 .bar {
+  margin-top: 20px;
   width: 100%;
   height: 250px;
 }
