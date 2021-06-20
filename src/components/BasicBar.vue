@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="pie-wrapper">
+    <tabs />
     <div class="bar" ref="bar"></div>
   </div>
 </template>
@@ -10,7 +11,9 @@ import { onMounted } from "@vue/runtime-core";
 
 import * as echarts from "echarts";
 import { useStore } from "vuex";
+import Tabs from "./Tabs.vue";
 export default {
+  components: { Tabs },
   setup() {
     let recordList = reactive({});
     const store = useStore();
@@ -18,10 +21,6 @@ export default {
     const bar = ref(null);
     let echart = null;
     const option = reactive({
-      title: {
-        text: "当月支出和收入",
-        left: "center"
-      },
       tooltip: {
         trigger: "item"
       },
@@ -64,9 +63,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.pie-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .bar {
-  padding: 40px;
   width: 100%;
-  height: 400px;
+  height: 250px;
 }
 </style>
