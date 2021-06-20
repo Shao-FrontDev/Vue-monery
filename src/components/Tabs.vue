@@ -1,8 +1,19 @@
 <template>
   <div>
     <ul class="tabs">
-      <li v-for="(item, index) in dataSource" :key="index" class="tabs__item">
-        {{ item }}
+      <li
+        :class="type === '-' && 'selected'"
+        @click="selectType('-')"
+        class="tabs__item"
+      >
+        支出
+      </li>
+      <li
+        :class="type === '+' && 'selected'"
+        @click="selectType('+')"
+        class="tabs__item"
+      >
+        收入
       </li>
     </ul>
   </div>
@@ -10,15 +21,18 @@
 
 <script>
 export default {
-  data() {
-    return {
-      dataSource: ["当月支出", "当月收入"]
+  props: { type: String },
+  setup(props, ctx) {
+    const selectType = type => {
+      ctx.emit("update:changeType", type);
     };
+    return { selectType };
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/helper.scss";
 .tabs {
   margin-top: 10px;
   display: flex;
@@ -31,5 +45,9 @@ export default {
     padding: 10px 20px;
     text-align: center;
   }
+}
+
+.selected {
+  color: $color-hightlight;
 }
 </style>
