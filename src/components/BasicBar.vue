@@ -10,9 +10,16 @@ import { onMounted } from "@vue/runtime-core";
 
 import * as echarts from "echarts";
 export default {
-  setup() {
+  props: {
+    data: Array,
+    default: () => {
+      return [];
+    }
+  },
+  setup(props) {
     const bar = ref(null);
 
+    console.log("data", props.data);
     onMounted(() => {
       const echartBar = echarts.init(bar.value);
       const option = {
@@ -29,13 +36,7 @@ export default {
             name: "访问来源",
             type: "pie",
             radius: "50%",
-            data: [
-              { value: 1048, name: "搜索引擎" },
-              { value: 735, name: "直接访问" },
-              { value: 580, name: "邮件营销" },
-              { value: 484, name: "联盟广告" },
-              { value: 300, name: "视频广告" }
-            ],
+            data: props.data,
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,

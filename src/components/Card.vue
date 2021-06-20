@@ -3,8 +3,8 @@
     <header class="card__header">
       <h3 class="">{{ toBeautify(card && card.title) }}</h3>
       <div>
-        <span class="card__header__element">出：{{ card?.outcome }}</span>
-        <span>入：{{ card && card.input }}</span>
+        <span class="card__header__element">出：{{ card?.expense }}</span>
+        <span>入：{{ card && card.income }}</span>
       </div>
     </header>
     <ol>
