@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <!-- <calendar /> -->
-    <basic-bar :data="PieData" />
+    <basic-bar />
     <ol>
       <li v-for="(card, index) in cardList" :key="index" class="item-wrapper">
         <Card :card="card" />
@@ -18,12 +18,11 @@ import { beautify } from "@/utility/tool";
 import Card from "@/components/Card.vue";
 import { reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
-import { computed, onMounted } from "@vue/runtime-core";
+import { computed } from "@vue/runtime-core";
 import BasicBar from "@/components/BasicBar.vue";
-import Calendar from "@/components/Calendar.vue";
 
 export default {
-  components: { Card, BasicBar, Calendar },
+  components: { Card, BasicBar },
   setup() {
     let recordList = reactive({});
     const store = useStore();
@@ -57,18 +56,6 @@ export default {
       return hashTable;
     });
 
-    const PieDataFomate = data => {
-      for (let i = 0; i < data.length; i++) {
-        const name = data[i].selectedTags[0].content;
-        const value = data[i].selectedAmount;
-        const item = { value, name };
-        PieData.push(item);
-      }
-    };
-    onMounted(() => {
-      PieDataFomate(recordList);
-      console.log(PieData);
-    });
     const toBeautify = value => {
       return beautify(value);
     };
