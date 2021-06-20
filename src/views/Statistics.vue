@@ -7,6 +7,14 @@
         <Card :card="card" />
       </li>
     </ol>
+    <div class="affix">
+      <Button color="#F56040" @click="handlerOpen">
+        选择月份
+      </Button>
+    </div>
+    <div class="month" :class="{ open: isOpen }">
+      <header @click="handlerClose"></header>
+    </div>
   </Layout>
 </template>
 
@@ -16,19 +24,30 @@ import { clone } from "@/utility/tool";
 import { calculate } from "@/utility/tool";
 import { beautify } from "@/utility/tool";
 import Card from "@/components/Card.vue";
-import { reactive } from "@vue/reactivity";
+import { reactive, ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 import BasicBar from "@/components/BasicBar.vue";
+import Button from "@/components/Button.vue";
 
 export default {
-  components: { Card, BasicBar },
+  components: { Card, BasicBar, Button },
   setup() {
     let recordList = reactive({});
+    const isOpen = ref(false);
     const store = useStore();
     const PieData = reactive([]);
     store.commit("fetchRecords");
     recordList = store.getters.recordList;
+
+    const handlerClose = () => {
+      isOpen.value = false;
+      console.log(isOpen.value);
+    };
+    const handlerOpen = () => {
+      console.log("open");
+      isOpen.value = !isOpen.value;
+    };
 
     const cardList = computed(() => {
       if (recordList.length === 0) {
@@ -63,7 +82,10 @@ export default {
       recordList,
       cardList,
       toBeautify,
-      PieData
+      PieData,
+      isOpen,
+      handlerClose,
+      handlerOpen
     };
   }
 };
@@ -76,5 +98,31 @@ export default {
   display: block;
   margin: 20px 10px;
   border-radius: 16px;
+}
+
+.affix {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  border-radius: 16px;
+  box-shadow: 1px 1px 5px 5px rgba($color: #333333, $alpha: 0.3);
+  transition: all 1s ease;
+}
+.affix:hover {
+  transform: scale(1.08);
+}
+
+.month {
+  position: absolute;
+  height: 50vh;
+  width: 100vw;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  background: $close-button;
+  transition: all 1s ease-in-out;
+  transform: translateY(-120%);
+}
+.month.open {
+  transform: translateY(-14%);
 }
 </style>
