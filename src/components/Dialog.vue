@@ -3,7 +3,7 @@
     <div class="dialog-wrapper">
       <main>删除后无法恢复，是否删除？</main>
       <footer>
-        <button class="btn">取消</button>
+        <button class="btn" @click="fail">取消</button>
         <button class="btn btn-red">删除</button>
       </footer>
     </div>
@@ -26,9 +26,11 @@ export default {
   },
   setup(props, context) {
     const success = () => {};
-    const fail = () => {};
     const close = () => {
       context.emit("update:visible", false);
+    };
+    const fail = () => {
+      close();
     };
     return {
       success,

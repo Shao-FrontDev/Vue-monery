@@ -13,7 +13,7 @@
     <div class="marigin-top">
       <Button @click="deleteTag" color="#e1306c">删除标签</Button>
     </div>
-    <Dialog :visible="false" />
+    <Dialog :visible="visible" @update:visible="handleVisible" />
   </Layout>
 </template>
 
@@ -33,13 +33,19 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const store = useStore();
+
+    const visible = ref(false);
     id.value = route.params.id;
     const back = () => {
       router.push({ name: "Labels" });
     };
     const deleteTag = () => {
-      store.commit("deleteTag", id.value);
-      router.push({ name: "Labels" });
+      visible.value = true;
+      // store.commit("deleteTag", id.value);
+      // router.push({ name: "Labels" });
+    };
+    const handleVisible = value => {
+      visible.value = value;
     };
     const update = e => {
       const tag = { id: id.value, content: e.target.value };
@@ -54,7 +60,9 @@ export default {
       back,
       update,
       deleteTag,
-      tag
+      tag,
+      visible,
+      handleVisible
     };
   }
 };
