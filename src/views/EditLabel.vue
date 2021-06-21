@@ -1,4 +1,5 @@
 <template>
+  <div :class="{ overlay: visible }"></div>
   <Layout>
     <div class="navbar">
       <Icon name="left" class="navbar__icon" @click="back" />
@@ -14,7 +15,12 @@
       <Button @click="openVisible" color="#e1306c">删除标签</Button>
     </div>
     <transition name="dialog">
-      <Dialog :visible="visible" :ok="deleteTag" :cancel="closeVisible" />
+      <Dialog
+        :visible="visible"
+        :ok="deleteTag"
+        :cancel="closeVisible"
+        class="dialog"
+      />
     </transition>
   </Layout>
 </template>
@@ -111,5 +117,18 @@ input {
 .dialog-enter-from,
 .dialog-leave-to {
   opacity: 0;
+}
+
+.dialog {
+  z-index: 101;
+}
+
+.overlay {
+  z-index: 100;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(0, 0, 0);
+  opacity: 0.3;
 }
 </style>
