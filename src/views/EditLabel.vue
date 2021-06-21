@@ -11,9 +11,11 @@
       @change="update"
     />
     <div class="marigin-top">
-      <Button @click="deleteTag" color="#e1306c">删除标签</Button>
+      <Button @click="openVisible" color="#e1306c">删除标签</Button>
     </div>
-    <Dialog :visible="visible" @update:visible="handleVisible" />
+    <transition name="dialog">
+      <Dialog :visible="visible" :ok="deleteTag" :cancel="closeVisible" />
+    </transition>
   </Layout>
 </template>
 
@@ -40,12 +42,15 @@ export default {
       router.push({ name: "Labels" });
     };
     const deleteTag = () => {
-      visible.value = true;
-      // store.commit("deleteTag", id.value);
-      // router.push({ name: "Labels" });
+      store.commit("deleteTag", id.value);
+      router.push({ name: "Labels" });
     };
-    const handleVisible = value => {
-      visible.value = value;
+
+    const openVisible = () => {
+      visible.value = true;
+    };
+    const closeVisible = () => {
+      visible.value = false;
     };
     const update = e => {
       const tag = { id: id.value, content: e.target.value };
@@ -62,7 +67,8 @@ export default {
       deleteTag,
       tag,
       visible,
-      handleVisible
+      openVisible,
+      closeVisible
     };
   }
 };
@@ -95,5 +101,15 @@ input {
   margin-top: 44px;
   display: flex;
   justify-content: center;
+}
+
+.dialog-enter-active,
+.dialog-leave-active {
+  transition: opacity 0.8s ease;
+}
+
+.dialog-enter-from,
+.dialog-leave-to {
+  opacity: 0;
 }
 </style>

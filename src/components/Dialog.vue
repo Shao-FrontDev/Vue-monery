@@ -4,7 +4,7 @@
       <main>删除后无法恢复，是否删除？</main>
       <footer>
         <button class="btn" @click="fail">取消</button>
-        <button class="btn btn-red">删除</button>
+        <button class="btn btn-red" @click="success">删除</button>
       </footer>
     </div>
   </template>
@@ -25,12 +25,11 @@ export default {
     cancel: { type: Function }
   },
   setup(props, context) {
-    const success = () => {};
-    const close = () => {
-      context.emit("update:visible", false);
+    const success = () => {
+      props.ok();
     };
     const fail = () => {
-      close();
+      props.cancel();
     };
     return {
       success,
