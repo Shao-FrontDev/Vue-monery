@@ -11,8 +11,9 @@
       @change="update"
     />
     <div class="marigin-top">
-      <Button @click="deleteTag">删除标签</Button>
+      <Button @click="deleteTag" color="#e1306c">删除标签</Button>
     </div>
+    <Dialog :visible="false" />
   </Layout>
 </template>
 
@@ -23,9 +24,10 @@ import FormItem from "@/components/Money/FormItem.vue";
 import Button from "@/components/Button.vue";
 import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import Dialog from "@/components/Dialog.vue";
 
 export default {
-  components: { Icon, FormItem, Button },
+  components: { Icon, FormItem, Button, Dialog },
   setup() {
     const id = ref(null);
     const route = useRoute();

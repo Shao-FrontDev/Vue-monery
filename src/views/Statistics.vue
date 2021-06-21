@@ -8,7 +8,7 @@
       </li>
     </ol>
     <div class="affix">
-      <Button color="#F56040" @click="handlerOpen">
+      <Button color="#F56040" @click="handlerOpen" class="btn">
         选择月份
       </Button>
     </div>
@@ -107,6 +107,9 @@ export default {
   border-radius: 16px;
   box-shadow: 1px 1px 5px 5px rgba($color: #333333, $alpha: 0.3);
   transition: all 1s ease;
+  .btn {
+    background: rgba($color: #333333, $alpha: 0.3);
+  }
 }
 .affix:hover {
   transform: scale(1.08);

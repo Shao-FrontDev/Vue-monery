@@ -12,7 +12,7 @@
       </router-link>
     </ol>
     <div class="wrapper">
-      <Button @click="create">新建标签</Button>
+      <Button @click="create" color="#405de6">新建标签</Button>
     </div>
   </Layout>
 </template>
