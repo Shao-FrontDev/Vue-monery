@@ -43,7 +43,8 @@ export default {
 <style lang="scss" scoped>
 .dialog-wrapper {
   border-radius: 16px;
-  padding: 40px 30px 10px;
+  padding: 10px 10px 10px;
+  width: 320px;
   background: #fff;
   position: fixed;
   left: 50%;
@@ -52,7 +53,8 @@ export default {
 }
 
 main {
-  padding: 50px;
+  padding: 50px 20px;
+  text-align: center;
 }
 
 footer {
