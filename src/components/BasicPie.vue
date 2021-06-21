@@ -25,11 +25,6 @@ export default {
       tooltip: {
         trigger: "item"
       },
-      legend: {
-        orient: "vertical",
-        left: "left",
-        padding: 20
-      },
       series: [
         {
           type: "pie",
