@@ -22,6 +22,7 @@
         class="dialog"
       />
     </transition>
+    <Toast v-if="toastData.showToast" :message="toastData.toastMessage" />
   </Layout>
 </template>
 
@@ -34,13 +35,16 @@ import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Dialog from "@/components/Dialog.vue";
 
+import Toast, { useToastEffect } from "@/components/Toast.vue";
+
 export default {
-  components: { Icon, FormItem, Button, Dialog },
+  components: { Icon, FormItem, Button, Dialog, Toast },
   setup() {
     const id = ref(null);
     const route = useRoute();
     const router = useRouter();
     const store = useStore();
+    const { toastData, showToast } = useToastEffect();
 
     const visible = ref(false);
     id.value = route.params.id;
@@ -62,6 +66,7 @@ export default {
       const tag = { id: id.value, content: e.target.value };
 
       store.commit("updateTag", tag);
+      showToast("修改成功");
     };
     const tag = computed(() => {
       const tag = store.getters.tagList.filter(item => item.id === id.value)[0];
@@ -74,7 +79,8 @@ export default {
       tag,
       visible,
       openVisible,
-      closeVisible
+      closeVisible,
+      toastData
     };
   }
 };
