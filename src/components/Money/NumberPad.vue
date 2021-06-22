@@ -177,7 +177,9 @@ export default {
 @import "@/assets/styles/constants.scss";
 
 .numberPad {
-  min-height: 256px;
+  padding: 2px;
+  padding-bottom: 5px;
+  background-color: #ffdc80;
   &__buttons {
     display: grid;
     grid-template-columns: repeat(4, auto);
@@ -185,7 +187,7 @@ export default {
     &__item {
       outline: none;
       border: none;
-      height: 64px;
+      height: 45px;
       background-color: $number-item;
       color: white;
       cursor: pointer;
@@ -206,9 +208,9 @@ export default {
 }
 
 .output {
-  height: 72px;
+  height: 64px;
   font-size: 36px;
-  line-height: 72px;
+  line-height: 64px;
   padding: 0 18px;
   text-align: right;
   background: #ffdc80;

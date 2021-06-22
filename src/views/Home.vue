@@ -142,7 +142,7 @@ export default {
 
 .record {
   position: absolute;
-  height: 100vh;
+  height: 93vh;
   width: 100vw;
   /* background-color: rgba($color: #000000, $alpha: 0.5); */
   transition: all 1s ease-in-out;

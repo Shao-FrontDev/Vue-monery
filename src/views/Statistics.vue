@@ -1,6 +1,5 @@
 <template>
   <Layout>
-    <!-- <calendar /> -->
     <basic-bar />
     <ol>
       <li v-for="(card, index) in cardList" :key="index" class="item-wrapper">
