@@ -4,6 +4,7 @@
       v-for="(month, index) in months"
       :key="month"
       @click="selected(index)"
+      class="btn"
       >{{ month }} 月</Button
     >
   </div>
@@ -65,5 +66,8 @@ export default {
   grid-template-rows: repeat(3, auto);
   justify-items: center;
   align-items: center;
+}
+.btn {
+  color: #333333;
 }
 </style>
