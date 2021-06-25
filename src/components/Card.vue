@@ -35,6 +35,7 @@ export default {
   },
 
   setup() {
+    console.log("start");
     const toBeautify = value => {
       return beautify(value);
     };

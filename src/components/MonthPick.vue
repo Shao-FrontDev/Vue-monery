@@ -1,30 +1,56 @@
 <template>
   <div class="grid-wrapper">
-    <Button v-for="month in months" :key="month">{{ month }} 月</Button>
+    <Button
+      v-for="(month, index) in months"
+      :key="month"
+      @click="selected(index)"
+      >{{ month }} 月</Button
+    >
   </div>
 </template>
 
 <script>
+import dayjs from "dayjs";
 import Button from "./Button.vue";
+import { reactive } from "@vue/reactivity";
+import { useStore } from "vuex";
 
 export default {
   components: { Button },
-  data() {
+
+  setup(props, ctx) {
+    const months = reactive([
+      "一",
+      "二",
+      "三",
+      "四",
+      "五",
+      "六",
+      "七",
+      "八",
+      "九",
+      "十",
+      "十一",
+      "十二"
+    ]);
+
+    const selected = index => {
+      const monthNumber = index + 1;
+      const currentMonth = dayjs().format("YYYY-MM");
+      let current;
+      if (monthNumber >= 10) {
+        current =
+          currentMonth.substring(0, currentMonth.length - 2) + monthNumber;
+      } else {
+        current =
+          currentMonth.substring(0, currentMonth.length - 1) + monthNumber;
+      }
+      ctx.emit("update:month", current);
+    };
+
     return {
-      months: [
-        "一",
-        "二",
-        "三",
-        "四",
-        "五",
-        "六",
-        "七",
-        "八",
-        "九",
-        "十",
-        "十一",
-        "十二"
-      ]
+      months,
+      selected
     };
   }
 };

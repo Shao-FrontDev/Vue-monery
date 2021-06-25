@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <basic-bar />
+    <BasicPie />
     <ol>
       <li v-for="(card, index) in cardList" :key="index" class="item-wrapper">
         <Card :card="card" />
@@ -12,7 +12,7 @@
       </Button>
     </div>
     <div class="month" :class="{ open: isOpen }">
-      <MonthPick />
+      <MonthPick @update:month="selectedMonth" />
     </div>
   </Layout>
 </template>
@@ -26,24 +26,33 @@ import Card from "@/components/Card.vue";
 import { reactive, ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
-import BasicBar from "@/components/BasicPie.vue";
+import BasicPie from "@/components/BasicPie.vue";
 import Button from "@/components/Button.vue";
 import MonthPick from "@/components/MonthPick.vue";
 
 export default {
-  components: { Card, BasicBar, Button, MonthPick },
+  components: { Card, BasicPie, Button, MonthPick },
   setup() {
     let recordList = reactive({});
     const isOpen = ref(false);
     const store = useStore();
     const PieData = reactive([]);
+
+    const currentMonth = ref(dayjs().format("YYYY-MM")); // '2021-06'
+
     store.commit("fetchRecords");
     recordList = store.getters.recordList;
+
+    const selectedMonth = month => {
+      currentMonth.value = month;
+      isOpen.value = false;
+    };
 
     const handlerClose = () => {
       isOpen.value = false;
       console.log(isOpen.value);
     };
+
     const handlerOpen = () => {
       console.log("open");
       isOpen.value = !isOpen.value;
@@ -61,17 +70,18 @@ export default {
       );
       for (let i = 0; i < newList.length; i++) {
         const [date, time] = newList[i].createAt.split("T");
-        hashTable[date] = hashTable[date] || {
-          title: date,
-          items: [],
-          income: 0,
-          expense: 0
-        };
-        hashTable[date].items.push(newList[i]);
-        hashTable[date].expense += calculate(newList[i], "-");
-        hashTable[date].income += calculate(newList[i], "+");
+        if (date.startsWith(currentMonth.value)) {
+          hashTable[date] = hashTable[date] || {
+            title: date,
+            items: [],
+            income: 0,
+            expense: 0
+          };
+          hashTable[date].items.push(newList[i]);
+          hashTable[date].expense += calculate(newList[i], "-");
+          hashTable[date].income += calculate(newList[i], "+");
+        }
       }
-
       return hashTable;
     });
 
@@ -85,7 +95,8 @@ export default {
       PieData,
       isOpen,
       handlerClose,
-      handlerOpen
+      handlerOpen,
+      selectedMonth
     };
   }
 };
