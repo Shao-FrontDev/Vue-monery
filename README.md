@@ -1,24 +1,21 @@
-# money
+# 小记账应用
 
-## Project setup
+## 背景
+  这个记账App 的目的主要是用来练习Vue全家桶的使用，用到的技术栈有：
+* Vue3
+* Vuex
+* Vue Router
+* Echart
+* Moment.js
+
+
+## 安装
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 在本地启动该项目
 ```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
+yarn start
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
