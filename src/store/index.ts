@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import { v4 as uuidv4 } from "uuid";
-import { clone } from "@/utility/tool";
+import { clone } from "@/utlis/tool";
 
 const localStorageTagsKeyName = "tagList";
 const localStorageRecordsKeyName = "recordList";

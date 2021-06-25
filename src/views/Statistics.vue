@@ -24,9 +24,9 @@
 
 <script>
 import dayjs from "dayjs";
-import { clone } from "@/utility/tool";
-import { calculate } from "@/utility/tool";
-import { beautify } from "@/utility/tool";
+import { clone } from "@/utlis/tool";
+import { calculate } from "@/utlis/tool";
+import { beautify } from "@/utlis/tool";
 import Card from "@/components/Card.vue";
 import { reactive, ref } from "@vue/reactivity";
 import { useStore } from "vuex";

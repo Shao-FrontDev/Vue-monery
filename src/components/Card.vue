@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { beautify } from "@/utility/tool";
+import { beautify } from "@/utlis/tool";
 export default {
   name: "Card",
   props: {

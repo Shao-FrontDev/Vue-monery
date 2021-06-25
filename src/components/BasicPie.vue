@@ -45,22 +45,26 @@ export default {
       type.value = TYPE;
     };
     const PieDataFomate = (data, type) => {
+      const dataArr = [];
       const filterData = data.filter(item => item.selectedType === type);
       for (let i = 0; i < filterData.length; i++) {
         const name = filterData[i].selectedTags[0].content;
         const value = filterData[i].selectedAmount;
         const item = { value, name };
-        option.series[0].data.push(item);
+
+        dataArr.push(item);
       }
+      console.log("dataArr", dataArr);
+      option.series[0].data = dataArr;
     };
 
     onMounted(() => {
+      console.log(recordList);
       PieDataFomate(recordList, type.value);
       echart = echarts.init(bar.value);
       echart.setOption(option);
     });
     watch(type, newValue => {
-      console.log(newValue);
       option.series[0].data = [];
       PieDataFomate(recordList, newValue);
       echart.setOption(option);
