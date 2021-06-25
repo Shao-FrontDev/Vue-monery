@@ -1,11 +1,16 @@
 <template>
   <Layout>
     <BasicPie />
-    <ol>
-      <li v-for="(card, index) in cardList" :key="index" class="item-wrapper">
-        <Card :card="card" />
-      </li>
-    </ol>
+    <div v-if="JSON.stringify(cardList) !== '{}'">
+      <ol>
+        <li v-for="(card, index) in cardList" :key="index" class="item-wrapper">
+          <Card :card="card" />
+        </li>
+      </ol>
+    </div>
+    <div v-else>
+      <h1 class="info">这个月的记录为空</h1>
+    </div>
     <div class="affix">
       <Button color="#F56040" @click="handlerOpen" class="btn">
         选择月份
@@ -138,5 +143,9 @@ export default {
 }
 .month.open {
   transform: translateY(-14%);
+}
+
+.info {
+  text-align: center;
 }
 </style>
