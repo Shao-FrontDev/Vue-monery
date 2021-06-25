@@ -8,6 +8,7 @@
 <script>
 import { reactive, ref } from "@vue/reactivity";
 import { onMounted, watch } from "@vue/runtime-core";
+import { handlerDuplicated } from "@/utlis/tool";
 
 import * as echarts from "echarts";
 import { useStore } from "vuex";
@@ -54,8 +55,8 @@ export default {
 
         dataArr.push(item);
       }
-      console.log("dataArr", dataArr);
-      option.series[0].data = dataArr;
+
+      option.series[0].data = handlerDuplicated(dataArr);
     };
 
     onMounted(() => {

@@ -37,3 +37,31 @@ export const beautify = (value: Date) => {
     return day.format("M月D日");
   }
 };
+
+interface tagItem {
+  value: number;
+  name: string;
+}
+
+export const handlerDuplicated = (state: tagItem) => {
+  let result: tagItem[] = [];
+  let set = new Set();
+
+  // @ts-ignore
+  for (let obj of state) {
+    if (set.has(obj.name)) {
+      result = result.map(item => {
+        if (item.name === obj.name) {
+          item.value += obj.value;
+          return item;
+        } else {
+          return item;
+        }
+      });
+    } else {
+      set.add(obj.name);
+      result.push(obj);
+    }
+  }
+  return result;
+};
