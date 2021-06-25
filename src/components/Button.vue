@@ -26,6 +26,7 @@ button {
   border: none;
   border-radius: 16px;
   color: #333333;
+  background: #ffffff;
   height: 50px;
   width: 100px;
 }
