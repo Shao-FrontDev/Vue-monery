@@ -39,7 +39,9 @@ export default {
   },
   methods: {
     create() {
+      console.log("click");
       const name = window.prompt("请输入标签名");
+      console.log("name", name);
       this.$store.commit("createTag", name);
       this.reload();
     }

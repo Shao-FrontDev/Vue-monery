@@ -94,7 +94,7 @@ export const store = createStore({
   mutations: {
     createTag(state, name) {
       if (name === null) return;
-      if (name?.trim === "") {
+      if (name.trim() === "") {
         window.alert("标签名不能为空");
       } else {
         const isExist = (state.tagList as Array<TagItem>).findIndex(
