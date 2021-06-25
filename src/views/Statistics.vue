@@ -12,7 +12,7 @@
       </Button>
     </div>
     <div class="month" :class="{ open: isOpen }">
-      <header @click="handlerClose"></header>
+      <MonthPick />
     </div>
   </Layout>
 </template>
@@ -28,9 +28,10 @@ import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 import BasicBar from "@/components/BasicPie.vue";
 import Button from "@/components/Button.vue";
+import MonthPick from "@/components/MonthPick.vue";
 
 export default {
-  components: { Card, BasicBar, Button },
+  components: { Card, BasicBar, Button, MonthPick },
   setup() {
     let recordList = reactive({});
     const isOpen = ref(false);
