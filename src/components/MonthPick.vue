@@ -20,6 +20,7 @@ export default {
   components: { Button },
 
   setup(props, ctx) {
+    const store = useStore();
     const months = reactive([
       "一",
       "二",
@@ -47,6 +48,7 @@ export default {
           currentMonth.substring(0, currentMonth.length - 1) + monthNumber;
       }
       ctx.emit("update:month", current);
+      store.commit("updateSelectedMonth", current);
     };
 
     return {

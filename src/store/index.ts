@@ -1,10 +1,11 @@
 import { createStore } from "vuex";
 import { v4 as uuidv4 } from "uuid";
-import { clone } from "@/utlis/tool";
+import { clone, currentMonth } from "@/utlis/tool";
 
 const localStorageTagsKeyName = "tagList";
 const localStorageRecordsKeyName = "recordList";
 const localStorageBalanceKeyName = "balance";
+const localStorageCurrentMonth = "currentMonth";
 
 interface TagItem {
   content: string;
@@ -89,7 +90,8 @@ export const store = createStore({
     tagList: [] as TagItem[],
     isAnimation: false,
     recordList: [] as RecordItem[],
-    balance: null
+    balance: null,
+    selectedMonth: currentMonth
   },
   mutations: {
     createTag(state, name) {
@@ -119,6 +121,7 @@ export const store = createStore({
           window.localStorage.getItem(localStorageTagsKeyName) as string
         ) || MockTagsData;
     },
+
     deleteTag(state, id) {
       const newtagList = (state.tagList as Array<TagItem>).filter(
         tag => tag.id !== id
@@ -140,6 +143,7 @@ export const store = createStore({
         JSON.stringify(data)
       );
     },
+
     toggleAnimation(state, payload) {
       state.isAnimation = payload;
     },
@@ -183,6 +187,22 @@ export const store = createStore({
         JSON.parse(
           window.localStorage.getItem(localStorageBalanceKeyName) as string
         ) || 0;
+    },
+    updateSelectedMonth(state, payload) {
+      state.selectedMonth = payload;
+      store.commit("saveCurrentMonth");
+    },
+    saveCurrentMonth(state) {
+      window.localStorage.setItem(
+        localStorageCurrentMonth,
+        JSON.stringify(state.selectedMonth)
+      );
+    },
+    fetchCurrentMonth(state) {
+      state.selectedMonth =
+        JSON.parse(
+          window.localStorage.getItem(localStorageCurrentMonth) as string
+        ) || currentMonth;
     }
   },
   actions: {},
@@ -199,6 +219,9 @@ export const store = createStore({
     },
     balance(state) {
       return state.balance;
+    },
+    currentMonth(state) {
+      return state.selectedMonth;
     }
   }
 });

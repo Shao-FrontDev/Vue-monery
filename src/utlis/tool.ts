@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-
+import { ref } from "vue";
 interface RecordItem {
   selectedTags: Array<String>;
   selectedNotes: string;
@@ -65,3 +65,6 @@ export const handlerDuplicated = (state: tagItem) => {
   }
   return result;
 };
+
+//获取当前月份
+export const currentMonth = dayjs().format("YYYY-MM")

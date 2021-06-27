@@ -42,24 +42,22 @@ export default {
     const isOpen = ref(false);
     const store = useStore();
     const PieData = reactive([]);
-
-    const currentMonth = ref(dayjs().format("YYYY-MM")); // '2021-06'
+    const currentMonth = ref(store.getters.currentMonth);
 
     store.commit("fetchRecords");
     recordList = store.getters.recordList;
 
     const selectedMonth = month => {
       currentMonth.value = month;
+      store.commit("updateSelectedMonth", month);
       isOpen.value = false;
     };
 
     const handlerClose = () => {
       isOpen.value = false;
-      console.log(isOpen.value);
     };
 
     const handlerOpen = () => {
-      console.log("open");
       isOpen.value = !isOpen.value;
     };
 
@@ -67,6 +65,7 @@ export default {
       if (recordList.length === 0) {
         return [];
       }
+
       const hashTable = {};
       const newList = clone(
         recordList.sort(
@@ -74,7 +73,7 @@ export default {
         )
       );
       for (let i = 0; i < newList.length; i++) {
-        const [date, time] = newList[i].createAt.split("T");
+        const [date, _] = newList[i].createAt.split("T");
         if (date.startsWith(currentMonth.value)) {
           hashTable[date] = hashTable[date] || {
             title: date,
@@ -87,6 +86,7 @@ export default {
           hashTable[date].income += calculate(newList[i], "+");
         }
       }
+
       return hashTable;
     });
 
