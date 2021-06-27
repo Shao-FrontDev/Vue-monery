@@ -138,7 +138,7 @@ export default {
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
   background: $close-button;
-  transition: all 1s ease-in-out;
+  transition: all 0.3s ease;
   transform: translateY(-120%);
 }
 .month.open {
