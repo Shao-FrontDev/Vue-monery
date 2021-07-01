@@ -98,6 +98,7 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/styles/helper.scss";
 .wrapper {
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   &__button {
