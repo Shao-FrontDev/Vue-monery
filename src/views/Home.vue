@@ -106,9 +106,8 @@ export default {
   justify-content: space-evenly;
   &__content {
     &__upper {
-      padding: 30px 0;
+      padding-bottom: 16px;
     }
-    padding-bottom: 50px;
     h2 {
       text-align: center;
     }
@@ -116,8 +115,8 @@ export default {
       text-align: center;
     }
     &__bottom {
+      padding: 16px;
       cursor: pointer;
-      padding: 20px 40px;
       border-radius: 8px;
       background-color: rgba($color: #6b6b6b, $alpha: 0.1);
     }

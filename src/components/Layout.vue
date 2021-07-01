@@ -1,6 +1,8 @@
 <template>
   <div class="nav-wrapper">
-    <header class="nav-wrapper__header">记账本</header>
+    <header class="nav-wrapper__header">
+      <div>记账本</div>
+    </header>
     <div class="nav-wrapper__content">
       <slot></slot>
     </div>
@@ -25,7 +27,9 @@ export default {
   height: 100vh;
   overflow: hidden;
   &__header {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 7vh;
     padding: 15px 0;
     background-color: #f56040;
